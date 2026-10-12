@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Online Coaching Intake — Ziad Elfeky</title>
+<title>Online Coaching Application · Ziad Elfeky</title>
+<meta name="description" content="Online coaching with Ziad Elfeky, by application. I review every application myself."/>
+<meta property="og:title" content="Online Coaching Application · Ziad Elfeky"/>
+<meta property="og:description" content="Fix the root cause. Build the body. Perform for life. Online coaching, by application."/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#111111"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -37,7 +42,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif;touch-action:manip
 .hint{font-weight:400;color:var(--soft);font-size:12px;margin-left:5px;}
 .req{color:var(--gold);margin-left:2px;}
 .err-msg{font-size:11px;color:var(--red);margin-top:2px;min-height:14px;}
-input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{width:100%;background:var(--white);border:1px solid var(--rule);border-radius:7px;padding:11px 14px;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s;-webkit-appearance:none;}
+input[type=text],input[type=number],input[type=date],input[type=password],input[type=tel],input[type=email],select,textarea{width:100%;background:var(--white);border:1px solid var(--rule);border-radius:7px;padding:11px 14px;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s;-webkit-appearance:none;}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);}
 input.err,select.err,textarea.err{border-color:var(--red);}
 textarea{resize:vertical;min-height:88px;}
@@ -65,7 +70,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .submit-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px;}
 .btn-primary{background:var(--ink);color:#fff;border:none;border-radius:8px;padding:15px 52px;font-size:14px;font-weight:600;letter-spacing:.05em;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .btn-primary:disabled{background:var(--soft);}
-.submit-note{font-size:12px;color:var(--soft);}
+.submit-note{font-size:12px;color:var(--soft);text-align:center;max-width:360px;line-height:1.6;}
 .err-banner{font-size:13px;color:var(--red);background:var(--red-bg);border:1px solid var(--red-border);border-radius:7px;padding:10px 16px;text-align:center;width:100%;}
 .success-wrap{max-width:500px;margin:60px auto;padding:0 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;}
 .success-icon{width:64px;height:64px;border-radius:50%;background:var(--green-bg);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;}
@@ -97,6 +102,9 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .detail-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;}
 .detail-key{font-size:12px;font-weight:600;color:var(--soft);min-width:160px;flex-shrink:0;}
 .detail-val{font-size:13px;color:var(--ink);flex:1;}
+.contact-box{background:var(--gold-faint);border:1px solid var(--rule);border-radius:10px;padding:14px 18px;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;}
+.contact-box a{color:var(--gold-dark);font-weight:600;text-decoration:none;font-size:14px;}
+.contact-box span{font-size:12px;color:var(--mid);}
 .footer{background:var(--ink);color:rgba(255,255,255,.28);text-align:center;padding:18px;font-size:12px;letter-spacing:.04em;}
 .footer span{color:var(--gold);font-weight:500;}
 @media(max-width:580px){
@@ -111,14 +119,14 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 
 <div class="hdr" id="hdr">
   <div class="hdr-eye">Online Coaching · Ziad Elfeky</div>
-  <h1 id="hdr-title">Client Intake Form</h1>
+  <h1 id="hdr-title">Online Coaching Application</h1>
   <div class="hdr-sub">Fix the root cause. Build the body. Perform for life.</div>
-  <div class="hdr-desc" id="hdr-desc">Fill this out fully and honestly. The more accurate your answers, the more precise your program will be.</div>
+  <div class="hdr-desc" id="hdr-desc">I review every application myself. Answer honestly: your program is built from what you write here.</div>
 </div>
 
-<div class="nav">
+<div class="nav" id="nav" style="display:none">
   <div class="nav-inner">
-    <button class="nav-btn active" id="nav-form" onclick="showView('form')">Intake Form</button>
+    <button class="nav-btn active" id="nav-form" onclick="showView('form')">Application</button>
     <button class="nav-btn" id="nav-dash" onclick="showView('dashboard')">Coach Dashboard</button>
   </div>
 </div>
@@ -142,6 +150,17 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     </div>
     <div class="row">
       <div class="field">
+        <label class="lbl">WhatsApp number <span class="req">*</span> <span class="hint">with country code</span></label>
+        <input type="tel" id="f-whatsapp" placeholder="+20 1XX XXX XXXX" autocomplete="tel">
+        <span class="err-msg" id="e-whatsapp"></span>
+      </div>
+      <div class="field">
+        <label class="lbl">Instagram <span class="hint">optional</span></label>
+        <input type="text" id="f-instagram" placeholder="@yourhandle" autocomplete="off">
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
         <label class="lbl">Gender <span class="req">*</span></label>
         <select id="f-gender" onchange="handleGender()">
           <option value="">Select</option>
@@ -152,7 +171,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
         <span class="err-msg" id="e-gender"></span>
       </div>
       <div class="field">
-        <label class="lbl">Occupation <span class="hint">— affects energy</span></label>
+        <label class="lbl">Occupation <span class="hint">affects energy and recovery</span></label>
         <input type="text" id="f-occupation" placeholder="e.g. Student, engineer…">
       </div>
     </div>
@@ -323,7 +342,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Progress Photos</span></div>
     <div class="note">
-      <strong>Send photos to WhatsApp after submitting.</strong> First thing in the morning, before eating. Same spot and light every time. Stand relaxed, arms slightly away from sides. No posing.<br><br>
+      <strong>Don't send them yet.</strong> When I message you on WhatsApp, reply with these 3 photos. First thing in the morning, before eating. Same spot and light every time. Stand relaxed, arms slightly away from sides. No posing.<br><br>
       <strong>Males:</strong> Shorts only, no shirt. &nbsp;&nbsp;<strong>Females:</strong> Sports bra + shorts, or fitted top + leggings.
     </div>
     <div class="cloth-grid">
@@ -353,6 +372,18 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div class="sec">
     <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Coaching Preferences</span></div>
     <div class="field">
+      <label class="lbl">How much support do you want?</label>
+      <div class="pills" id="p-support"></div>
+    </div>
+    <div class="field">
+      <label class="lbl">Add nutrition coaching?</label>
+      <div class="pills" id="p-nutri-addon"></div>
+    </div>
+    <div class="field">
+      <label class="lbl">When do you want to start?</label>
+      <div class="pills" id="p-start"></div>
+    </div>
+    <div class="field">
       <label class="lbl">Online coaching experience</label>
       <div class="pills" id="p-prev-coach"></div>
     </div>
@@ -370,10 +401,22 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     </div>
   </div>
 
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">09</span><span class="sec-title">How You Found Me</span></div>
+    <div class="field">
+      <label class="lbl">Where did you first see my work?</label>
+      <div class="pills" id="p-source"></div>
+    </div>
+    <div class="field">
+      <label class="lbl">Which reel or post, if you remember?</label>
+      <input type="text" id="f-source-detail" placeholder="e.g. the knee pain reel, the HYROX series…">
+    </div>
+  </div>
+
   <div class="submit-wrap">
     <div id="submit-err" class="err-banner" style="display:none">Please fill in all required fields.</div>
-    <button class="btn-primary" id="submit-btn" onclick="handleSubmit()">Submit Intake Form</button>
-    <span class="submit-note">Then send your 3 progress photos via WhatsApp</span>
+    <button class="btn-primary" id="submit-btn" onclick="handleSubmit()">Submit application</button>
+    <span class="submit-note">I'll message you on WhatsApp from +20 150 154 5118. Save the number so it reaches you.</span>
   </div>
 </div>
 </div>
@@ -384,20 +427,20 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="success-icon">
       <svg width="28" height="28" fill="none" stroke="#2d6a4f" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="success-title" id="success-title">You're all set.</div>
-    <div class="success-body">Your intake has been received. Coach Ziad will personally review it and send you your full onboarding pack via WhatsApp — including your program brief, complete pricing and packages, and payment details.</div>
+    <div class="success-title" id="success-title">Application received.</div>
+    <div class="success-body">I review every application myself. If online coaching is the right fit for you, I'll message you on WhatsApp with your onboarding pack: your program brief, packages and payment details.</div>
     <div class="next-steps">
       <div class="next-tag">What happens next</div>
-      <div class="next-item"><span class="next-num">1.</span>Coach Ziad reviews your intake personally</div>
-      <div class="next-item"><span class="next-num">2.</span>You receive your onboarding pack — brief, pricing &amp; payment details</div>
-      <div class="next-item"><span class="next-num">3.</span>Send your progress photos and your program begins</div>
+      <div class="next-item"><span class="next-num">1.</span>I review your application personally</div>
+      <div class="next-item"><span class="next-num">2.</span>You get your onboarding pack on WhatsApp: brief, packages and payment</div>
+      <div class="next-item"><span class="next-num">3.</span>You send your 3 photos, and your program goes live on the app within 2 to 3 days of payment</div>
     </div>
     <div style="background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;width:100%;text-align:left;margin-top:4px;">
       <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Progress Photos — Please Prepare</div>
-      <div style="font-size:13px;color:var(--mid);line-height:1.7;">Once you receive your onboarding pack, you'll need to send progress photos so your coach can assess your starting point. Take them in good lighting, same time of day.</div>
+      <div style="font-size:13px;color:var(--mid);line-height:1.7;">Once you receive your onboarding pack, you'll send progress photos so I can assess your starting point. Take them in good lighting, same time of day.</div>
       <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--rule);">
         <div style="font-size:12.5px;color:var(--ink);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--gold-dark);">Men:</strong> Front, back, and side — shorts only, no shirt.</div>
-        <div style="font-size:12.5px;color:var(--ink);line-height:1.7;"><strong style="color:var(--gold-dark);">Women:</strong> Front, back, and side — sports bra + shorts or fitted leggings. Whatever you're comfortable in, as long as your coach can assess your posture and structure.</div>
+        <div style="font-size:12.5px;color:var(--ink);line-height:1.7;"><strong style="color:var(--gold-dark);">Women:</strong> Front, back, and side — sports bra + shorts or fitted leggings. Whatever you're comfortable in, as long as I can assess your posture and structure.</div>
       </div>
       <div style="font-size:12px;color:var(--soft);margin-top:12px;font-style:italic;">Front · Back · Side — relaxed, arms slightly away from your body.</div>
     </div>
@@ -412,11 +455,12 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <div id="dash-pin" style="display:none">
     <div class="pin-wrap">
       <div class="pin-title">Coach Access</div>
-      <div class="pin-sub">Enter your PIN to view submitted intakes.</div>
+      <div class="pin-sub">Sign in with your coach account.</div>
       <div style="width:100%;display:flex;flex-direction:column;gap:10px">
-        <input type="password" id="pin-input" placeholder="PIN" style="text-align:center;font-size:22px;letter-spacing:.3em">
-        <div id="pin-err" style="font-size:12px;color:var(--red);text-align:center;display:none">Incorrect PIN</div>
-        <button class="btn-primary" onclick="checkPin()">Enter</button>
+        <input type="email" id="login-email" placeholder="Email" autocomplete="username">
+        <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+        <div id="pin-err" style="font-size:12px;color:var(--red);text-align:center;display:none">Sign-in failed</div>
+        <button class="btn-primary" id="login-btn" onclick="signIn()">Sign in</button>
       </div>
       <button onclick="showView('form')" style="font-size:12px;color:var(--soft);background:none;border:none;cursor:pointer">Back to form</button>
     </div>
@@ -427,7 +471,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="wrap">
       <div class="dash-header">
         <div>
-          <div class="dash-title">Client Submissions</div>
+          <div class="dash-title">Applications</div>
           <div class="dash-count" id="dash-count">Loading…</div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -458,7 +502,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <script>
 var SUPABASE_URL = "https://gndbfxwjcumkftbultkt.supabase.co";
 var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImduZGJmeHdqY3Vta2Z0YnVsdGt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwMzc5NTAsImV4cCI6MjA5NzYxMzk1MH0.LLk6yk3kgyH5INPE60hU1tyAaKNCWF6Sdkoywg3kRjo";
-var COACH_PIN = "1991";
+var accessToken = null;
 var TABLE = "intake_submissions";
 var pillState = {};
 var stressVal = null;
@@ -530,6 +574,10 @@ function initAllPills() {
   initPills('p-nutrition', ['No tracking','Counting calories','Specific diet','Inconsistent / struggling'], false);
   initPills('p-prev-coach', ['First time','Yes, with someone else','Yes, with you before'], false);
   initPills('p-checkin', ['WhatsApp weekly','Video call monthly','App only','Message as needed'], false);
+  initPills('p-support', ['A weekly check-in','Support during the week on WhatsApp','Daily access','Not sure yet'], false);
+  initPills('p-nutri-addon', ['Yes','No','Not sure yet'], false);
+  initPills('p-start', ['This week','Within 2 weeks','This month','Just exploring'], false);
+  initPills('p-source', ['Instagram reel','Instagram stories','A friend or client','Google','Other'], false);
   initScale();
 }
 
@@ -545,6 +593,7 @@ function showView(v) {
   document.getElementById('nav-form').classList.remove('active');
   document.getElementById('nav-dash').classList.remove('active');
   document.getElementById('view-' + v).style.display = 'block';
+  document.getElementById('nav').style.display = v === 'dashboard' ? 'block' : 'none';
   if (v === 'dashboard') {
     document.getElementById('nav-dash').classList.add('active');
     document.getElementById('hdr-title').textContent = 'Coach Dashboard';
@@ -559,28 +608,63 @@ function showView(v) {
     }
   } else {
     document.getElementById('nav-form').classList.add('active');
-    document.getElementById('hdr-title').textContent = 'Client Intake Form';
+    document.getElementById('hdr-title').textContent = 'Online Coaching Application';
     document.getElementById('hdr-desc').style.display = 'block';
   }
 }
 
-function checkPin() {
-  var val = document.getElementById('pin-input').value;
-  if (val === COACH_PIN) {
-    dashUnlocked = true;
-    document.getElementById('dash-pin').style.display = 'none';
-    loadSubmissions();
-  } else {
+function authHeaders() {
+  return { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + accessToken };
+}
+
+function showLogin(msg) {
+  dashUnlocked = false;
+  accessToken = null;
+  try { sessionStorage.removeItem('ze_coach_token'); } catch (e) {}
+  document.getElementById('dash-list').style.display = 'none';
+  document.getElementById('dash-detail').style.display = 'none';
+  document.getElementById('dash-pin').style.display = 'block';
+  if (msg) {
     var err = document.getElementById('pin-err');
+    err.textContent = msg;
     err.style.display = 'block';
-    setTimeout(function() { err.style.display = 'none'; }, 2000);
   }
 }
 
+function signIn() {
+  var email = document.getElementById('login-email').value.trim();
+  var pass = document.getElementById('login-pass').value;
+  var err = document.getElementById('pin-err');
+  var btn = document.getElementById('login-btn');
+  err.style.display = 'none';
+  if (!email || !pass) { err.textContent = 'Enter your email and password'; err.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+    body: JSON.stringify({ email: email, password: pass })
+  })
+  .then(function(res) { return res.json().then(function(j) { return { ok: res.ok, j: j }; }); })
+  .then(function(r) {
+    btn.disabled = false; btn.textContent = 'Sign in';
+    if (!r.ok || !r.j.access_token) { err.textContent = 'Sign-in failed. Check your email and password.'; err.style.display = 'block'; return; }
+    accessToken = r.j.access_token;
+    try { sessionStorage.setItem('ze_coach_token', accessToken); } catch (e) {}
+    dashUnlocked = true;
+    document.getElementById('login-pass').value = '';
+    document.getElementById('dash-pin').style.display = 'none';
+    loadSubmissions();
+  })
+  .catch(function(e) {
+    btn.disabled = false; btn.textContent = 'Sign in';
+    err.textContent = 'Network error: ' + e.message; err.style.display = 'block';
+  });
+}
+
 function dashLogout() {
-  dashUnlocked = false;
-  document.getElementById('pin-input').value = '';
+  showLogin();
   showView('form');
+  if (location.hash) history.replaceState(null, '', location.pathname);
 }
 
 function showDashList() {
@@ -593,29 +677,33 @@ function loadSubmissions() {
   showDashList();
   document.getElementById('clients-list').innerHTML = '<div class="loading">Loading…</div>';
   fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?select=*&order=submitted_at.desc', {
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    headers: authHeaders()
   })
-  .then(function(res) { return res.json(); })
+  .then(function(res) {
+    if (res.status === 401 || res.status === 403) { throw new Error('session'); }
+    return res.json();
+  })
   .then(function(data) {
-    allSubmissions = data;
+    allSubmissions = Array.isArray(data) ? data : [];
     renderList();
   })
   .catch(function(e) {
-    document.getElementById('clients-list').innerHTML = '<div class="empty-state">Error: ' + e.message + '</div>';
+    if (e.message === 'session') { showLogin('Session expired. Sign in again.'); return; }
+    document.getElementById('clients-list').innerHTML = '<div class="empty-state">Error: ' + esc(e.message) + '</div>';
   });
 }
 
 function renderList() {
   var count = allSubmissions.length;
-  document.getElementById('dash-count').textContent = count + ' intake' + (count !== 1 ? 's' : '') + ' received';
+  document.getElementById('dash-count').textContent = count + ' application' + (count !== 1 ? 's' : '') + ' received';
   var list = document.getElementById('clients-list');
   if (count === 0) {
-    list.innerHTML = '<div class="empty-state">No submissions yet. Share the form with your clients.</div>';
+    list.innerHTML = '<div class="empty-state">No applications yet.</div>';
     return;
   }
   var html = '';
   allSubmissions.forEach(function(s, i) {
-    var meta = [s.gender, s.location, s.primary_goal].filter(Boolean).join(' · ');
+    var meta = [s.location, s.primary_goal, s.start_when, s.source].filter(Boolean).join(' · ');
     html += '<div class="client-card" onclick="showDetail(' + i + ')">' +
       '<div class="avatar">' + (s.name || '?').charAt(0).toUpperCase() + '</div>' +
       '<div style="flex:1;min-width:0"><div class="client-name">' + esc(s.name || '—') + '</div>' +
@@ -635,7 +723,7 @@ function showDetail(idx) {
     if (confirm('Delete ' + s.name + '\'s record? Cannot be undone.')) { deleteRecord(s.id); }
   };
   var rows = [
-    ['Name', s.name], ['Date of Birth', s.dob], ['Gender', s.gender],
+    ['Name', s.name], ['Instagram', s.instagram], ['Date of Birth', s.dob], ['Gender', s.gender],
     ['Occupation', s.occupation], ['Location', s.location],
     ['Height', s.height_cm ? s.height_cm + ' cm' : ''],
     ['Weight', s.weight_kg ? s.weight_kg + ' kg' : ''],
@@ -653,10 +741,17 @@ function showDetail(idx) {
     ['Nutrition', s.nutrition], ['Water', s.water], ['Steps', s.steps],
     ['Physique self-assessment', s.physique_self],
     ['Previous coaching', s.prev_coach], ['What worked', s.what_worked],
-    ['Check-in preference', s.checkin], ['Other notes', s.other_notes]
+    ['Check-in preference', s.checkin], ['Support wanted', s.support_level],
+    ['Nutrition add-on', s.nutrition_addon], ['Start', s.start_when],
+    ['Found me via', s.source], ['Which post', s.source_detail],
+    ['Other notes', s.other_notes]
   ];
   var html = '<div class="detail-name">' + esc(s.name || '—') + '</div>';
   html += '<div class="detail-meta">' + esc([s.gender, s.location].filter(Boolean).join(' · ')) + ' · Submitted ' + fmtDate(s.submitted_at, true) + '</div>';
+  var waDigits = String(s.whatsapp || '').replace(/[^0-9]/g, '');
+  if (waDigits) {
+    html += '<div class="contact-box"><a href="https://wa.me/' + waDigits + '" target="_blank" rel="noopener">WhatsApp ' + esc(s.whatsapp) + '</a><span>Reply the same day</span></div>';
+  }
   rows.forEach(function(r) {
     if (r[1] && String(r[1]).trim()) {
       html += '<div class="detail-row"><span class="detail-key">' + r[0] + '</span><span class="detail-val">' + esc(String(r[1])) + '</span></div>';
@@ -666,11 +761,14 @@ function showDetail(idx) {
 }
 
 function deleteRecord(id) {
-  fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?id=eq.' + id, {
+  fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?id=eq.' + encodeURIComponent(id), {
     method: 'DELETE',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    headers: authHeaders()
   })
-  .then(function() { loadSubmissions(); })
+  .then(function(res) {
+    if (res.status === 401 || res.status === 403) { showLogin('Session expired. Sign in again.'); return; }
+    loadSubmissions();
+  })
   .catch(function(e) { alert('Error: ' + e.message); });
 }
 
@@ -691,6 +789,10 @@ function validate() {
     if (empty) { err.textContent = 'Required'; ok = false; }
     else { err.textContent = ''; }
   });
+  var wa = document.getElementById('f-whatsapp');
+  var waErr = document.getElementById('e-whatsapp');
+  if (wa.value.replace(/[^0-9]/g, '').length < 8) { wa.classList.add('err'); waErr.textContent = 'Add your WhatsApp number with country code'; ok = false; }
+  else { wa.classList.remove('err'); waErr.textContent = ''; }
   var pain = document.getElementById('f-pain');
   var painErr = document.getElementById('e-pain');
   if (!pain.value.trim()) { pain.classList.add('err'); painErr.textContent = 'Required — write "None" if no issues'; ok = false; }
@@ -701,6 +803,8 @@ function validate() {
 function collectData() {
   return {
     name: document.getElementById('f-name').value.trim(),
+    whatsapp: document.getElementById('f-whatsapp').value.trim(),
+    instagram: document.getElementById('f-instagram').value.trim(),
     dob: document.getElementById('f-dob').value,
     gender: document.getElementById('f-gender').value,
     occupation: document.getElementById('f-occupation').value.trim(),
@@ -734,6 +838,11 @@ function collectData() {
     prev_coach: getPill('p-prev-coach'),
     what_worked: document.getElementById('f-what-worked').value.trim(),
     checkin: getPill('p-checkin'),
+    support_level: getPill('p-support'),
+    nutrition_addon: getPill('p-nutri-addon'),
+    start_when: getPill('p-start'),
+    source: getPill('p-source'),
+    source_detail: document.getElementById('f-source-detail').value.trim(),
     other_notes: document.getElementById('f-other').value.trim(),
     submitted_at: new Date().toISOString()
   };
@@ -762,22 +871,23 @@ function handleSubmit() {
   .then(function(res) {
     if (!res.ok) { return res.text().then(function(t) { throw new Error(t); }); }
     var first = data.name ? data.name.split(' ')[0] : '';
-    document.getElementById('success-title').textContent = first ? "You're all set, " + first + "." : "You're all set.";
+    document.getElementById('success-title').textContent = first ? 'Application received, ' + first + '.' : 'Application received.';
+    window.scrollTo(0, 0);
     document.getElementById('view-form').style.display = 'none';
     document.getElementById('view-success').style.display = 'block';
   })
   .catch(function(e) {
     btn.disabled = false;
-    btn.textContent = 'Submit Intake Form';
+    btn.textContent = 'Submit application';
     alert('Something went wrong. Please try again.\n\n' + e.message);
   });
 }
 
 function resetForm() {
-  document.querySelectorAll('input[type=text],input[type=number],input[type=date],textarea').forEach(function(el) { el.value = ''; });
+  document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=tel],textarea').forEach(function(el) { el.value = ''; });
   document.querySelectorAll('select').forEach(function(el) { el.selectedIndex = 0; });
   document.getElementById('submit-btn').disabled = false;
-  document.getElementById('submit-btn').textContent = 'Submit Intake Form';
+  document.getElementById('submit-btn').textContent = 'Submit application';
   document.getElementById('f-cycle-wrap').style.display = 'none';
   stressVal = null;
   initAllPills();
@@ -796,7 +906,7 @@ function exportCSV() {
   var blob = new Blob([rows.join('\n')], { type: 'text/csv' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'ziad_intakes_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.download = 'ziad_applications_' + new Date().toISOString().slice(0, 10) + '.csv';
   a.click();
 }
 
@@ -813,6 +923,12 @@ function esc(s) {
 
 window.addEventListener('DOMContentLoaded', function() {
   initAllPills();
+  try { accessToken = sessionStorage.getItem('ze_coach_token'); } catch (e) { accessToken = null; }
+  if (accessToken) dashUnlocked = true;
+  if (location.hash === '#coach') showView('dashboard');
+});
+window.addEventListener('hashchange', function() {
+  if (location.hash === '#coach') showView('dashboard');
 });
 </script>
 </body>
