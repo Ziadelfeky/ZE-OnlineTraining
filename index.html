@@ -147,6 +147,42 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
 .cat-icon{background:var(--white) !important;border:1px solid var(--rule);}
 .nav{border-bottom-color:var(--rule) !important;}
 .lbl,.cert-name{font-weight:500 !important;}
+
+/* Plans */
+.plan-intro{font-size:12.5px;color:var(--mid);margin:2px 0 8px;line-height:1.65;}
+.plans{display:flex;flex-direction:column;gap:10px;}
+.plan{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:15px 16px;cursor:pointer;transition:border-color .14s,background .14s;-webkit-tap-highlight-color:transparent;outline:none;}
+.plan:focus-visible{border-color:var(--gold);}
+.plan.on{border-color:var(--gold);background:var(--gold-faint);}
+.plan-top{display:flex;align-items:flex-start;gap:12px;}
+.plan-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--soft);flex-shrink:0;margin-top:4px;position:relative;}
+.plan.on .plan-dot{border-color:var(--gold);}
+.plan.on .plan-dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--gold);}
+.plan-main{flex:1;min-width:0;}
+.plan-name{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:500;line-height:1.3;}
+.plan-tag{display:inline-block;font-family:'Poppins',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,110,.45);border-radius:10px;padding:1px 8px;margin-left:6px;vertical-align:2px;}
+.plan-sub{font-size:12.5px;font-weight:500;color:var(--gold-dark);margin-top:3px;line-height:1.45;}
+.plan-price{text-align:right;flex-shrink:0;line-height:1.2;}
+.plan-price b{display:block;font-family:'Lora',Georgia,serif;font-size:21px;font-weight:500;color:var(--gold-dark);}
+.plan-price small{display:block;font-size:10.5px;color:var(--soft);}
+.plan-detail{display:none;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);}
+.plan.on .plan-detail{display:block;}
+.plan-detail p{font-size:13px;color:var(--mid);line-height:1.75;}
+.plan-warn{font-size:12px;color:var(--gold-dark);margin-top:8px;font-style:italic;line-height:1.6;}
+.mrows{margin-top:10px;}
+.mrow{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--rule);}
+.mrow:last-child{border-bottom:none;}
+.mrow span:nth-child(2){color:var(--ink);font-weight:500;text-align:right;}
+.mrow span:nth-child(3){color:var(--soft);font-size:12px;text-align:right;min-width:88px;}
+.mrow em{font-style:normal;color:var(--green);font-size:11px;margin-left:6px;}
+.plan-foot{font-size:11.5px;color:var(--soft);margin-top:10px;line-height:1.6;}
+.budget{background:var(--white);border:1px dashed rgba(201,169,110,.45);border-radius:10px;padding:15px 16px;margin-top:16px;}
+.budget-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.budget p{font-size:12.5px;color:var(--mid);line-height:1.65;}
+.budget-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--rule);}
+.budget-row:last-of-type{border-bottom:none;}
+.budget-row b{font-weight:500;white-space:nowrap;}
+.budget-btn{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:500;color:var(--gold-dark);border:1px solid var(--gold);border-radius:20px;padding:7px 16px;text-decoration:none;}
 </style>
 </head>
 <body>
@@ -171,7 +207,29 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
 <div class="wrap">
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Basic Info</span></div>
+    <div class="sec-hdr"><span class="sec-num">01</span><span class="sec-title">Choose Your Plan</span></div>
+    <div class="field">
+      <label class="lbl">Plan <span class="req">*</span></label>
+      <p class="plan-intro">Every plan is an individualized program written and supervised by me in the training app, with a video for each exercise, warm-up, mobility and cooldown. The plans differ in how often we check in and how much access you have to me.</p>
+      <div class="plans" id="p-plan" role="radiogroup" aria-label="Plan"></div>
+      <span class="err-msg" id="e-plan"></span>
+      <p class="plan-foot">EGP prices apply when paying from an Egyptian bank account or InstaPay. Prices as of November 2026. You can upgrade at any time.</p>
+    </div>
+    <div class="field">
+      <label class="lbl">Add nutrition coaching? <span class="hint">+$40 / 2,200 EGP a month</span></label>
+      <div class="pills" id="p-nutri-addon"></div>
+    </div>
+    <div class="budget">
+      <div class="budget-tag">On a tighter budget?</div>
+      <p>My ready-made programs: a fixed plan in the training app, with no check-ins or follow-up. No application needed.</p>
+      <div class="budget-row"><span>6-week program for women</span><b>2,500 EGP</b></div>
+      <div class="budget-row"><span>12-week weight-loss program</span><b>4,500 EGP</b></div>
+      <a class="budget-btn" href="https://wa.me/201501545118?text=Hi%20Ziad%2C%20I%27d%20like%20the%20link%20to%20your%20ready-made%20programs." target="_blank" rel="noopener">Get the link on WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Basic Info</span></div>
     <div class="row">
       <div class="field">
         <label class="lbl">Full Name <span class="req">*</span></label>
@@ -217,7 +275,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">02</span><span class="sec-title">Current Measurements</span></div>
+    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Current Measurements</span></div>
     <div class="row">
       <div class="field">
         <label class="lbl">Height <span class="hint">— cm</span></label>
@@ -236,7 +294,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">03</span><span class="sec-title">Training Background</span></div>
+    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Training Background</span></div>
     <div class="field">
       <label class="lbl">Total training experience <span class="req">*</span></label>
       <div class="pills" id="p-exp"></div>
@@ -287,7 +345,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">04</span><span class="sec-title">Goals & Priorities</span></div>
+    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Goals & Priorities</span></div>
     <div class="field">
       <label class="lbl">Primary goal <span class="req">*</span></label>
       <div class="pills" id="p-goal"></div>
@@ -308,7 +366,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">05</span><span class="sec-title">Health & Medical</span></div>
+    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Health & Medical</span></div>
     <div class="field">
       <label class="lbl">Pain, injuries, or conditions <span class="req">*</span></label>
       <textarea id="f-pain" placeholder="e.g. Lower back pain, knee surgery 2022 — or write 'None'"></textarea>
@@ -339,7 +397,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">06</span><span class="sec-title">Lifestyle & Recovery</span></div>
+    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Lifestyle & Recovery</span></div>
     <div class="field">
       <label class="lbl">Average sleep per night</label>
       <div class="pills" id="p-sleep"></div>
@@ -375,7 +433,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">07</span><span class="sec-title">Progress Photos</span></div>
+    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Progress Photos</span></div>
     <div class="note">
       <strong>Optional.</strong> Upload them here, or send them when I message you on WhatsApp. First thing in the morning, before eating. Same spot and light every time. Stand relaxed, arms slightly away from sides. No posing.<br><br>
       <strong>Males:</strong> Shorts only, no shirt. &nbsp;&nbsp;<strong>Females:</strong> Sports bra + shorts, or fitted top + leggings.
@@ -418,15 +476,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">08</span><span class="sec-title">Coaching Preferences</span></div>
-    <div class="field">
-      <label class="lbl">How much support do you want?</label>
-      <div class="pills" id="p-support"></div>
-    </div>
-    <div class="field">
-      <label class="lbl">Add nutrition coaching?</label>
-      <div class="pills" id="p-nutri-addon"></div>
-    </div>
+    <div class="sec-hdr"><span class="sec-num">09</span><span class="sec-title">Coaching Preferences</span></div>
     <div class="field">
       <label class="lbl">When do you want to start?</label>
       <div class="pills" id="p-start"></div>
@@ -450,7 +500,7 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
   </div>
 
   <div class="sec">
-    <div class="sec-hdr"><span class="sec-num">09</span><span class="sec-title">How You Found Me</span></div>
+    <div class="sec-hdr"><span class="sec-num">10</span><span class="sec-title">How You Found Me</span></div>
     <div class="field">
       <label class="lbl">Where did you first see my work?</label>
       <div class="pills" id="p-source"></div>
@@ -476,12 +526,12 @@ input::placeholder,textarea::placeholder{color:#6b665d;}
       <svg width="28" height="28" fill="none" stroke="#86cfa6" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div class="success-title" id="success-title">Application received.</div>
-    <div class="success-body">I review every application myself. If online coaching is the right fit for you, I'll message you on WhatsApp with your onboarding pack: your program brief, packages and payment details.</div>
+    <div class="success-body">I review every application myself. If online coaching is the right fit for you, I'll message you on WhatsApp to confirm your plan and send the payment details.</div>
     <div class="next-steps">
       <div class="next-tag">What happens next</div>
       <div class="next-item"><span class="next-num">1.</span>I review your application personally</div>
-      <div class="next-item"><span class="next-num">2.</span>You get your onboarding pack on WhatsApp: brief, packages and payment</div>
-      <div class="next-item"><span class="next-num">3.</span>Your program goes live on the app within 2 to 3 days of payment</div>
+      <div class="next-item"><span class="next-num">2.</span>I confirm your plan on WhatsApp and send the payment details</div>
+      <div class="next-item"><span class="next-num">3.</span>After payment you get an email invite to the training app. Your program is ready within 1 to 2 days of registering</div>
     </div>
     <div class="photo-status" id="photo-status" style="display:none"></div>
     <div id="photo-prep" style="background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;width:100%;text-align:left;margin-top:4px;">
@@ -610,6 +660,72 @@ function initScale() {
   }
 }
 
+
+// Online plans. USD fixed; EGP at 56 EGP per USD (Nov 2026), rounded to the nearest 100.
+var PLANS = [
+  { value: 'Light', name: 'Light', tag: '', sub: 'Monthly check-in', usd: '60', egp: '3,400',
+    desc: 'Your individualized program, updated every 4 weeks. One check-in a month, 2 form-check videos a month, and pain or injury messages answered within 24 hours.',
+    warn: 'Not for active rehab. Current injuries, post-surgery and return-to-sport start at Essential.',
+    months: [['1 month', '$60', '3,400 EGP', ''], ['2 months', '$110', '6,200 EGP', 'save $10'], ['3 months', '$150', '8,400 EGP', 'save $30'], ['6 months', '$285', '16,000 EGP', 'save $75']] },
+  { value: 'Essential', name: 'Essential', tag: '', sub: 'Weekly check-in', usd: '100', egp: '5,600',
+    desc: 'Your individualized program with a weekly check-in, adjusted every week from your logs and feedback.',
+    warn: '',
+    months: [['1 month', '$100', '5,600 EGP', ''], ['2 months', '$185', '10,400 EGP', 'save $15'], ['3 months', '$250', '14,000 EGP', 'save $50'], ['6 months', '$475', '26,600 EGP', 'save $125']] },
+  { value: 'Performance', name: 'Performance', tag: 'Recommended', sub: 'Weekly check-in + WhatsApp support, Sat–Thu', usd: '120', egp: '6,700',
+    desc: 'Everything in Essential, plus WhatsApp support from Saturday to Thursday for questions, form checks and quick adjustments.',
+    warn: '',
+    months: [['1 month', '$120', '6,700 EGP', ''], ['2 months', '$220', '12,300 EGP', 'save $20'], ['3 months', '$300', '16,800 EGP', 'save $60'], ['6 months', '$570', '31,900 EGP', 'save $150']] },
+  { value: 'Elite', name: 'Elite', tag: '5 spots', sub: 'Daily access', usd: '180', egp: '10,100',
+    desc: 'Everything in Performance, with daily access to me. Limited to 5 clients at a time.',
+    warn: '',
+    months: [['1 month', '$180', '10,100 EGP', ''], ['2 months', '$330', '18,500 EGP', 'save $30'], ['3 months', '$450', '25,200 EGP', 'save $90'], ['6 months', '$850', '47,600 EGP', 'save $230']] },
+  { value: 'Not sure yet', name: 'Not sure yet', tag: '', sub: 'I\'ll recommend a plan after reading your application', usd: '', egp: '',
+    desc: 'Pick this if you want my recommendation. I\'ll suggest the plan that fits your goal, schedule and history when I message you.',
+    warn: '', months: [] }
+];
+
+function initPlans() {
+  pillState['p-plan'] = '';
+  var el = document.getElementById('p-plan');
+  if (!el) return;
+  el.innerHTML = '';
+  PLANS.forEach(function(t) {
+    var card = document.createElement('div');
+    card.className = 'plan';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'radio');
+    card.setAttribute('aria-checked', 'false');
+    var rows = t.months.map(function(m) {
+      return '<div class="mrow"><span>' + m[0] + (m[3] ? '<em>' + m[3] + '</em>' : '') + '</span><span>' + m[1] + '</span><span>' + m[2] + '</span></div>';
+    }).join('');
+    card.innerHTML =
+      '<div class="plan-top">' +
+        '<span class="plan-dot"></span>' +
+        '<div class="plan-main">' +
+          '<div class="plan-name">' + t.name + (t.tag ? '<span class="plan-tag">' + t.tag + '</span>' : '') + '</div>' +
+          '<div class="plan-sub">' + t.sub + '</div>' +
+        '</div>' +
+        (t.usd ? '<div class="plan-price"><b>$' + t.usd + '</b><small>' + t.egp + ' EGP</small><small>per month</small></div>' : '') +
+      '</div>' +
+      '<div class="plan-detail"><p>' + t.desc + '</p>' +
+        (t.warn ? '<div class="plan-warn">' + t.warn + '</div>' : '') +
+        (rows ? '<div class="mrows">' + rows + '</div>' : '') +
+      '</div>';
+    function pick() {
+      pillState['p-plan'] = t.value;
+      el.querySelectorAll('.plan').forEach(function(c) { c.classList.remove('on'); c.setAttribute('aria-checked', 'false'); });
+      card.classList.add('on');
+      card.setAttribute('aria-checked', 'true');
+      document.getElementById('e-plan').textContent = '';
+    }
+    card.addEventListener('click', pick);
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+    });
+    el.appendChild(card);
+  });
+}
+
 function initAllPills() {
   initPills('p-exp', ['Less than 1 year','1–2 years','2–4 years','4+ years'], false);
   initPills('p-break', ['Less than 4 weeks','1–2 months','2–4 months','4+ months'], false);
@@ -623,7 +739,7 @@ function initAllPills() {
   initPills('p-nutrition', ['No tracking','Counting calories','Specific diet','Inconsistent / struggling'], false);
   initPills('p-prev-coach', ['First time','Yes, with someone else','Yes, with you before'], false);
   initPills('p-checkin', ['WhatsApp weekly','Video call monthly','App only','Message as needed'], false);
-  initPills('p-support', ['A weekly check-in','Support during the week on WhatsApp','Daily access','Not sure yet'], false);
+  initPlans();
   initPills('p-nutri-addon', ['Yes','No','Not sure yet'], false);
   initPills('p-start', ['This week','Within 2 weeks','This month','Just exploring'], false);
   initPills('p-source', ['Instagram reel','Instagram stories','A friend or client','Google','Other'], false);
@@ -752,7 +868,7 @@ function renderList() {
   }
   var html = '';
   allSubmissions.forEach(function(s, i) {
-    var meta = [s.location, s.primary_goal, s.start_when, s.source].filter(Boolean).join(' · ');
+    var meta = [s.support_level, s.location, s.primary_goal, s.start_when].filter(Boolean).join(' · ');
     html += '<div class="client-card" onclick="showDetail(' + i + ')">' +
       '<div class="avatar">' + (s.name || '?').charAt(0).toUpperCase() + '</div>' +
       '<div style="flex:1;min-width:0"><div class="client-name">' + esc(s.name || '—') + '</div>' +
@@ -790,7 +906,7 @@ function showDetail(idx) {
     ['Nutrition', s.nutrition], ['Water', s.water], ['Steps', s.steps],
     ['Physique self-assessment', s.physique_self],
     ['Previous coaching', s.prev_coach], ['What worked', s.what_worked],
-    ['Check-in preference', s.checkin], ['Support wanted', s.support_level],
+    ['Check-in preference', s.checkin], ['Plan', s.support_level],
     ['Nutrition add-on', s.nutrition_addon], ['Start', s.start_when],
     ['Found me via', s.source], ['Which post', s.source_detail],
     ['Other notes', s.other_notes]
@@ -831,7 +947,7 @@ function validate() {
     if (!el.value.trim()) { el.classList.add('err'); err.textContent = 'Required'; ok = false; }
     else { el.classList.remove('err'); err.textContent = ''; }
   });
-  var pillChecks = [['p-exp','e-exp'],['p-break','e-break'],['p-equipment','e-equipment'],['p-goal','e-goal']];
+  var pillChecks = [['p-plan','e-plan'],['p-exp','e-exp'],['p-break','e-break'],['p-equipment','e-equipment'],['p-goal','e-goal']];
   pillChecks.forEach(function(c) {
     var v = getPill(c[0]);
     var err = document.getElementById(c[1]);
@@ -888,7 +1004,7 @@ function collectData() {
     prev_coach: getPill('p-prev-coach'),
     what_worked: document.getElementById('f-what-worked').value.trim(),
     checkin: getPill('p-checkin'),
-    support_level: getPill('p-support'),
+    support_level: getPill('p-plan'),
     nutrition_addon: getPill('p-nutri-addon'),
     start_when: getPill('p-start'),
     source: getPill('p-source'),
